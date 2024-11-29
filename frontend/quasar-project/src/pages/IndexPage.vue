@@ -4,12 +4,12 @@
       alt="Knjiznica slika"
       src="~assets/library.jpg"
       style="width: 200px; height: 200px"
-    >
+    />
   </q-page>
 </template>
 
 <script setup>
 defineOptions({
-  name: 'IndexPage'
+  name: "IndexPage",
 });
 </script>
