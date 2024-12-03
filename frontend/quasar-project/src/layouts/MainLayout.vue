@@ -51,6 +51,18 @@ const linksList = [
     link: "#/",
   },
   {
+    title: "Registracija",
+    caption: "Registracija",
+    icon: "chat",
+    link: "#/registracija",
+  },
+  {
+    title: "Login",
+    caption: "Login",
+    icon: "chat",
+    link: "#/login",
+  },
+  {
     title: "Lokacija",
     caption: "Lokacija",
     icon: "home",
@@ -61,30 +73,6 @@ const linksList = [
     caption: "Popis knjiga",
     icon: "chat",
     link: "#/PopisKnjiga",
-  },
-  {
-    title: "Forum",
-    caption: "forum.quasar.dev",
-    icon: "record_voice_over",
-    link: "https://forum.quasar.dev",
-  },
-  {
-    title: "Twitter",
-    caption: "@quasarframework",
-    icon: "rss_feed",
-    link: "https://twitter.quasar.dev",
-  },
-  {
-    title: "Facebook",
-    caption: "@QuasarFramework",
-    icon: "public",
-    link: "https://facebook.quasar.dev",
-  },
-  {
-    title: "Quasar Awesome",
-    caption: "Community Quasar projects",
-    icon: "favorite",
-    link: "https://awesome.quasar.dev",
   },
 ];
 
