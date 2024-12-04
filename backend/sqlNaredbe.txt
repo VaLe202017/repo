@@ -1,0 +1,56 @@
+1.	Napraviti SQL naredbu kojom se provjerava koliko je knjiga kod odabranog korisnika (id_korisnik) – vraća se ukupan broj knjiga kod korisnika
+
+SELECT count(*) FROM `rezervacija` WHERE korisnik=2 
+
+2.	Napraviti SQL naredbu kojom se provjerava ima li koji slobodan primjerak knjige za id_knjige – vratiti broj slobodnih primjeraka knjige za npr. id knjige=5
+
+SELECT knjiga.stanje AS stanje,count(rezervacija.id) AS rezervirano FROM knjiga, rezervacija WHERE knjiga.id=rezervacija.knjiga AND knjiga=11
+
+
+3.	Napraviti SQL naredbu kojom se vraća broj rezerviranih primjeraka knjige za id_knjige – vratiti broj rezerviranih primjeraka knjige za npr. id_knjige=5
+
+SELECT COUNT(*) AS broj_rezervacija FROM rezervacija WHERE knjiga = 5;
+
+4.	Napraviti SQL naredbu za dohvat svih korisnika kod kojih se nalazi knjiga s id_knjige (npr.id_knjige=5)
+
+SELECT korisnik.* FROM rezervacija, korisnik, knjiga WHERE korisnik.id=rezervacija.korisnik AND rezervacija.korisnik=knjiga.id AND knjiga.id=5;
+
+5.	Napraviti SQL naredbu kojom se može dobiti ukupan broj svih primjeraka svih knjiga u knjižnici
+
+SELECT COUNT(stanje) AS Sve_knjige FROM knjiga
+
+6.	Napraviti SQL naredbu kojom se može dobiti ukupan broj svih rezerviranih primjeraka u knjižnici
+
+SELECT COUNT(*) FROM knjiga , rezervacija WHERE knjiga.id=rezervacija.knjiga;
+
+7.	Napraviti SQL naredbu kojom se može dobiti ukupan broj svih slobodnih primjeraka u knjižnici (zanima nas prostorno zauzeće knjiga)
+
+SELECT COUNT(*) FROM knjiga , rezervacija WHERE knjiga.id!=rezervacija.knjiga;
+
+8.	Napraviti SQL naredbu za ispis knjiga koje imaju manje od 3 primjerka.
+
+SELECT knjiga.naslov FROM knjiga WHERE stanje<3;
+
+9.	Napraviti SQL naredbu koja vraća sve korisnike koji imaju rezervirane knjige duže od mjesec dana. I vratiti popis tih primjeraka knjiga.
+
+SELECT korisnik.ime AS ime_korisnika, korisnik.prezime AS prezime_korisnika, knjiga.naslov AS naslov_knjige, rezervacija.datum_rez AS datum_rezervacije FROM rezervacija JOIN korisnik ON rezervacija.korisnik = korisnik.id JOIN knjiga ON rezervacija.knjiga = knjiga.id WHERE DATEDIFF(NOW(), rezervacija.datum_rez) > 30;
+
+10.	U bazu dodati uz korisnika podatke: email i broj telefona
+
+ALTER TABLE korisnik ADD COLUMN email VARCHAR(50) NOT NULL, ADD COLUMN broj_telefona VARCHAR(20) NOT NULL;
+
+11.	Napraviti SQL naredbu koja vraća e-mail, broj telefona, naslov knjige i datum rezervacije – za korisnike koji imaju rezervirane knjige duže od mjesec dana, kako bi se korisniku poslao mail i SMS poruka s napomenom da mora vratiti knjigu k koja je preuzeta datuma d.
+
+SELECT korisnik.email, korisnik.broj_telefona, knjiga.naslov AS naslov_knjige, rezervacija.datum_rez AS datum_rezervacije FROM rezervacija JOIN korisnik ON rezervacija.korisnik = korisnik.id JOIN knjiga ON rezervacija.knjiga = knjiga.id WHERE DATEDIFF(NOW(), rezervacija.datum_rez) > 30;
+
+12.	Napraviti SQL naredbu kojom se provjerava ima li korisnik rezervirana dva ili više primjeraka iste knjige.
+
+SELECT korisnik, knjiga, COUNT(*) AS broj_rezervacija FROM rezervacija GROUP BY rezervacija.korisnik, rezervacija.knjiga having COUNT(*)>=2;
+
+13.	Napraviti SQL naredbu za izmjenu podataka o korisniku. 
+
+UPDATE korisnik SET id=1, ime ='Perica', prezime='Peric', korime='perica', lozinka=12 WHERE id=1;
+
+14.	Na koji način bismo mogli nadopuniti bazu tako da možemo pratiti rezervacije kroz određeno vrijeme? Odnosno trebamo mogućnost da nam se ne brišu podaci o rezervacijama, kako bismo pratili statistiku zauzetosti pojedinih knjiga i eventualno naručili više primjeraka.
+
+Arhiviranjem umjesto brisanja to jest da dodamo column u kojem imamo status to jest je li aktivan, zavrsen ili otkazan.
