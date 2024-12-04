@@ -113,7 +113,7 @@ app.get("/api/rezerv_knjige/knjiga/:id_knjige", (req, res) => {
 });
 
 app.get("/api/korisnici", (req, res) => {
-  const query = "SELECT * FROM korinici";
+  const query = "SELECT * FROM korisnik";
   connection.query(query, (error, results) => {
     if (error) throw error;
     res.send(results);
@@ -122,7 +122,7 @@ app.get("/api/korisnici", (req, res) => {
 
 app.get("/api/korisnici/:id_korisnik", (req, res) => {
   const id_knjige = req.params.id_knjige;
-  const query = "SELECT * FROM korisnici WHERE id_korisnik LIKE ?";
+  const query = "SELECT * FROM korisnik WHERE id_korisnik LIKE ?";
   const queryParams = [`%${id_korisnik}%`];
   connection.query(query, queryParams, (error, results) => {
     if (error) throw error;
