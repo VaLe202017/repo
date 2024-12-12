@@ -74,6 +74,12 @@ const linksList = [
     icon: "chat",
     link: "#/PopisKnjiga",
   },
+  {
+    title: "Popis knjiga iz baze",
+    caption: "Popis knjiga",
+    icon: "chat",
+    link: "#/popis_knjiga_baza",
+  },
 ];
 
 const leftDrawerOpen = ref(false);

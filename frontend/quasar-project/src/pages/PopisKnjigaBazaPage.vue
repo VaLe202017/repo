@@ -139,7 +139,7 @@ export default {
       await axios.get('http://localhost:3000/api/knjige/')
         .then(result => {
           console.log(result.data.data)
-          this.books = result.data.data
+          this.books = result.data
           console.log(this.books[0].id)
         })
         .catch(error => {

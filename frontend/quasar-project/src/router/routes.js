@@ -19,6 +19,7 @@ const routes = [
         path: "/registracija",
         component: () => import("pages/RegistracijaPage.vue"),
       },
+      { path: "/popis_knjiga_baza", component: () => import("pages/PopisKnjigaBazaPage.vue") },
     ],
   },
 
