@@ -143,9 +143,9 @@ app.put("/api/korisnici/:id_korisnik", (req, res) => {
   const query = `UPDATE korisnik SET ime = ?, prezime = ?, email = ? WHERE id = ?`;
   const queryParams = [ime, prezime, email, idKorisnik];
 
-  connection.query(query, queryParams, (err, results) => {
-    if (err) {
-      console.error("Greška pri izvršavanju upita:", err.message);
+  connection.query(query, queryParams, (error, results) => {
+    if (error) {
+      console.error("Greška pri izvršavanju upita:", error.message);
       return res.status(500).json({ error: "Greška na serveru." });
     }
 
