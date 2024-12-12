@@ -80,6 +80,12 @@ const linksList = [
     icon: "chat",
     link: "#/popis_knjiga_baza",
   },
+  {
+    title: "Rezervirane Knjige",
+    caption: "Rezervirane Knjige",
+    icon: "chat",
+    link: "#/rezervirane_knjige",
+  },
 ];
 
 const leftDrawerOpen = ref(false);
