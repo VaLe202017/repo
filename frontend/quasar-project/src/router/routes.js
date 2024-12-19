@@ -21,11 +21,29 @@ const routes = [
       },
       { path: "/popis_knjiga_baza", component: () => import("pages/PopisKnjigaBazaPage.vue") },
       { path: "/rezervirane_knjige", component: () => import("pages/RezervacijePage.vue") },
+    ]
+  },
+  {
+    path: "/admin",
+    component: () => import("layouts/AdminLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/IndexPage.vue") },
+      {
+        path: "/admin/popisKnjiga",
+        component: () => import("pages/PopisKnjigaPage.vue"),
+      },
+      {
+        path: "/admin/pretrazivanje",
+        component: () => import("pages/TraziKnjiguPage.vue"),
+      },
+      { path: "/admin/popis_knjiga_baza", component: () => import("pages/PopisKnjigaBazaPage.vue") },
+      { path: "/admin/popis_korisnika", component: () => import("pages/PopisKorisnikaPage.vue") },
+      { path: "/admin/rezervirane_knjige", component: () => import("pages/RezervacijePage.vue") },
+      { path: "/admin/unos_knjige", component: () => import("pages/UnosKnjigaPage.vue") },
+      { path: "/admin/logout", component: () => import("pages/AdminLogout.vue") },
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),
