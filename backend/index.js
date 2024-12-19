@@ -123,6 +123,14 @@ app.get("/api/rezerv_knjige/knjiga/:id_knjige", (req, res) => {
   });
 });
 
+app.get("/api/korisnici", (req, res) => {
+  const query = `SELECT * FROM korisnici`;
+  connection.query(query, (error, results) => {
+    if (error) return res.status(500).json({ error: error.message });
+    res.json(results);
+  });
+});
+
 app.put("/api/korisnici/:id_korisnik", (req, res) => {
   const idKorisnik = req.params.id_korisnik;
   const { ime, prezime, email } = req.body;
@@ -165,6 +173,20 @@ app.delete("/api/rezerv_knjige/:id_knjiga", (req, res) => {
       return res.status(404).json({ message: "Rezervacija za ovu knjigu nije pronađena." });
     }
     res.json({ message: "Rezervacija uspešno obrisana." });
+  });
+});
+
+app.post("/api/knjige_unos", (req, res) => {
+  const { naslov, autor, opis, slika, stanje } = req.body;
+
+  if (!naslov || !autor || !opis || !slika || !stanje) {
+    return res.status(400).json({ error: "Molimo unesite sve podatke (naslov, autor, opis, slika, stanje)." });
+  }
+
+  const query = "INSERT INTO knjiga (naslov, autor, opis, slika, stanje) VALUES (?, ?, ?, ?, ?)";
+  connection.query(query, [naslov, autor, opis, slika, stanje], (error, results) => {
+    if (error) return res.status(500).json({ error: error.message });
+    res.status(201).json({ message: "Knjiga uspješno dodana.", id: results.insertId });
   });
 });
 
